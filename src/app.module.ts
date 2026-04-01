@@ -17,7 +17,7 @@ import { PostagemModule } from './postagem/postagem.modules';
       database: 'db_blogpessoal', // nome do banco de dados no MySQL
       entities: [Postagem],
       synchronize: true,
-      logging: true,
+      logging: false,
     }),
     PostagemModule,
   ],
