@@ -1,3 +1,4 @@
+import { TemaService } from './../../tema/temaservice/tema.service';
 /* eslint-disable prettier/prettier */
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { ILike, Repository } from "typeorm";
@@ -10,7 +11,8 @@ export class PostagemService {
 
   constructor(
     @InjectRepository(Postagem)
-    private postagemRepository: Repository<Postagem>
+    private postagemRepository: Repository<Postagem>,
+    private TemaService: TemaService
   ){}
   
   async findAll(): Promise<Postagem[]>{
@@ -34,16 +36,18 @@ export class PostagemService {
 
   }
   async create(postagem: Postagem): Promise<Postagem>{
+    
+    await this.TemaService.findById(postagem.tema.id);
+    
     return await this.postagemRepository.save(postagem);
   }
 
   async update(postagem:Postagem): Promise<Postagem>{
 
-    const buscarPostagem: Postagem = await this.findById(postagem.id);
+    await this.findById(postagem.id);
 
-    if(!buscarPostagem || !postagem.id){
-      throw new HttpException('Postagem não encontrada', HttpStatus.NOT_FOUND);
-    }
+    await this.TemaService.findById(postagem.tema.id);
+    
     return await this.postagemRepository.save(postagem);
   }
 
