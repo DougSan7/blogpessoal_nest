@@ -7,13 +7,13 @@ import { Postagem } from '../../postagem/entities/postagem.entity';
 export class Tema {
   
   @PrimaryGeneratedColumn() //cria uma chave primaria e auto increment
-  id: number;
+  id!: number;
 
   @IsNotEmpty() // verifica se o campo está vazio
   @Column({ length: 255, nullable: false }) 
-  descricao: string;
+  descricao!: string;
 
   @OneToMany(() => Postagem, (Postagem) => Postagem.tema)
-  postagem: Postagem;
+  postagem!: Postagem;
 }
 

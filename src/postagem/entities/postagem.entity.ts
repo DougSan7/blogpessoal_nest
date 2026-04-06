@@ -6,7 +6,7 @@ import { Tema } from '../../tema/entities/tema.entity';
 @Entity({ name: 'tb_postagens' }) //Cria uma tabela chamada tb_postagem
 export class Postagem {
   @PrimaryGeneratedColumn() //cria uma chave primaria e auto increment
-  id: number;
+  id!: number;
 
   @IsNotEmpty() // verifica se o campo está vazio
   @Column({ length: 1000, nullable: false }) //cria uma columa chamada titulo, com 100 caracteres e não pode ser nulo
