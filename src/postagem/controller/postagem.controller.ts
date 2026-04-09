@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
+import { jwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 import { Postagem } from '../entities/postagem.entity';
 import { PostagemService } from './../services/postagem.service';
-import { Body, Controller, Get, Post, Delete, Put, HttpCode, HttpStatus, Param, ParseIntPipe } from "@nestjs/common";
+import { Body, Controller, Get, Post, Delete, Put, HttpCode, HttpStatus, Param, ParseIntPipe, UseGuards } from "@nestjs/common";
 
+@UseGuards(jwtAuthGuard)
 @Controller("/postagens")
 export default class PostagemController{
   constructor (private readonly PostagemService: PostagemService){ }
@@ -42,6 +44,4 @@ export default class PostagemController{
   delete(@Param('id', ParseIntPipe) id:number){
     return this.PostagemService.delete(id);
   }
-
-
 }

@@ -6,7 +6,7 @@ import { DeleteResult, ILike, Repository } from "typeorm";
 @Injectable()
 export class TemaService{
   findByTema(titulo: string): Promise<Tema[]> {
-    throw new Error('Method not implemented.');
+    throw new Error('O tema pesquisada não existe.');
   }
 
   constructor(
