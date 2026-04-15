@@ -1,11 +1,14 @@
 /* eslint-disable prettier/prettier */
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { jwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 import { Postagem } from '../entities/postagem.entity';
 import { PostagemService } from './../services/postagem.service';
 import { Body, Controller, Get, Post, Delete, Put, HttpCode, HttpStatus, Param, ParseIntPipe, UseGuards } from "@nestjs/common";
 
+@ApiTags('Postagem')
 @UseGuards(jwtAuthGuard)
 @Controller("/postagens")
+@ApiBearerAuth()
 export default class PostagemController{
   constructor (private readonly PostagemService: PostagemService){ }
 

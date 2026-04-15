@@ -1,10 +1,13 @@
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { jwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 import { TemaService } from '../temaservice/tema.service';
 import { Tema } from './../entities/tema.entity';
 import {  Controller,  Get,  Post,  Put,  Delete,  Param,  Body,  HttpCode,  HttpStatus,  ParseIntPipe, UseGuards } from "@nestjs/common";
 
+@ApiTags('Tema')
 @UseGuards(jwtAuthGuard)
 @Controller("/temas")
+@ApiBearerAuth()
 export class TemaController{
   constructor (private readonly temaService: TemaService){ }
 
